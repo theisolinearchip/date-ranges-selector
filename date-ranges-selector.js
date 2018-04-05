@@ -48,7 +48,16 @@
 
 		var response = undefined;
 		var main_id = this.attr("id");
-		var drs_settings = $.fn.datesRangesSelector.drs_settings;
+
+		if (!$.fn.datesRangesSelector.drs_settings) {
+			$.fn.datesRangesSelector.drs_settings = [];
+		}
+		var drs_settings = $.fn.datesRangesSelector.drs_settings[main_id];
+
+		if (!$.fn.datesRangesSelector.drs_enabled) {
+			$.fn.datesRangesSelector.drs_enabled = [];
+		}
+		var drs_enabled = $.fn.datesRangesSelector.drs_enabled[main_id];
 
 		if (action == undefined || typeof action == "object") {
 
@@ -70,10 +79,10 @@
 			$("#" + main_id).addClass(settings.main_class_prefix);
 
 			// Save main settings
-			$.fn.datesRangesSelector.drs_settings = settings;
+			$.fn.datesRangesSelector.drs_settings[main_id] = settings;
 
 			// Save enabled / disabled status
-			$.fn.datesRangesSelector.drs_enabled = true;
+			$.fn.datesRangesSelector.drs_enabled[main_id] = true;
 
 			response = this;
 
@@ -175,7 +184,7 @@
 			}
 
 			// Check if we're disabled or not
-			if (!$.fn.datesRangesSelector.drs_enabled) {
+			if (!drs_enabled) {
 				$("#" + main_id).find("button,input,select").attr("disabled", true);
 			}
 
@@ -253,7 +262,7 @@
 			response = [];
 
 			// only get if not disabled
-			if ($.fn.datesRangesSelector.drs_enabled) {
+			if (drs_enabled) {
 
 				$.each($("#" + main_id).find(".line"), function(index, value) {
 
@@ -289,7 +298,7 @@
 			$("#" + main_id).find("button,input,select").attr("disabled", true);
 
 			// Main flag
-			$.fn.datesRangesSelector.drs_enabled = false;
+			$.fn.datesRangesSelector.drs_enabled[main_id] = false;
 
 			response = this;
 
@@ -298,7 +307,7 @@
 			$("#" + main_id).find("button,input,select").attr("disabled", false);
 
 			// Main flag
-			$.fn.datesRangesSelector.drs_enabled = true;
+			$.fn.datesRangesSelector.drs_enabled[main_id] = true;
 
 			response = this;
 
