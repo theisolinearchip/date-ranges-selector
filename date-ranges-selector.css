@@ -1,0 +1,92 @@
+/**
+* date-ranges-selector
+*
+* Author: Albert Gonzalez - http://www.albertgonzalez.coffee
+* 
+* Under the UNLICENSE (http://unlicense.org/)
+*
+*/
+
+.drs {
+
+}
+
+.drs .drs_add_new_date_range_button {
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	border-radius: 3px;
+	border-style: solid;
+	height: 34px;
+	color: #6A7480;
+	border-color: #EAEAEA !important;
+	background-color: #FFFFFF;
+	cursor: pointer;
+	border-width: 1px;
+}
+
+.drs .line {
+
+}
+
+.drs .line .element {
+	display: inline-block;
+	margin-right: 10px;
+	height: 36px;
+}
+
+.drs .line input {
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555555;
+	border: 1px solid #EAEAEA;
+	background-color: #FFFFFF;
+	border-radius: 4px;
+}
+
+.drs .line input:disabled,input[disabled],select:disabled,select[disabled] {
+	background-color: #EEEEEE !important;
+}
+
+.drs .line button,select {
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	border-radius: 4px;
+	border-style: solid;
+	height: 34px;
+	color: #555555;
+	border-color: #EAEAEA !important;
+	background-color: #FFFFFF;
+	border-width: 1px;
+}
+
+.drs .line button {
+	cursor: pointer;
+	border-radius: 3px !important;
+	color: #6A7480 !important;
+}
+
+.drs .line button:disabled,button[disabled] {
+	background-color: #EAEAEA !important;
+	border-color: #EAEAEA !important;
+	color: #555555 !important;
+	cursor: inherit !important;
+}
+
+.drs .line .drs_add_date_range_button {
+	color: #FFFFFF !important;
+	background-color: #189BA3 !important;
+	border-color: #189BA3 !important;
+}

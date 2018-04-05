@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<meta charset="utf-8">
+		
+		<title>date-ranges-selector</title>
+
+		<link rel="stylesheet" href="../date-ranges-selector.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+
+		<style>
+
+			body {
+				padding: 10px;
+				font-family: sans-serif;
+			}
+
+			.date_ranges {
+				margin: 10px;
+				padding: 10px 0px;
+			}
+
+			.list_container {
+				width: 50%;
+				margin: 10px;
+				padding: 20px;
+
+				background-color: #F7F7F7;
+			}
+
+			.options_container {
+				margin: 10px;
+			}
+
+			.code {
+				margin: 10px;
+				padding: 20px;
+				font-family: monospace;
+
+				background-color: #E2E2E2;
+			}
+
+			.log {
+				margin: 10px;
+				padding: 20px;
+				background-color: #F7F7F7;
+				font-family: monospace;
+
+				max-height: 500px;
+				overflow-y: scroll;
+			}
+
+		</style>
+			
+	</head>
+
+	<body>
+
+		<h1>date-ranges-selector</h1>
+
+		<p>A jQuery plugin to create and manage date ranges. Also requires jquery-ui for the datepickers. <a href="https://github.com/koopaconan/date-ranges-selector" target="_blank">Source code and documentation available on Github</a>.</p>
+
+		<div id="date_ranges_container" class="date_ranges"> </div>
+
+		<br />
+
+		<div class="options_container">
+			<button onclick="add_range_with_dates()">Add range with dates</button>
+			<button onclick='$("#date_ranges_container").datesRangesSelector("removeAllDateRanges");'>Remove all</button>
+		</div>
+
+		<div class="options_container">
+			<button onclick="get_date_ranges()">Get ranges</button>
+		</diV>
+
+		<div class="options_container">
+			<button onclick="$('#date_ranges_container').datesRangesSelector('disable');">Disable</button>
+			<button onclick="$('#date_ranges_container').datesRangesSelector('enable');">Enable</button>
+		</div>
+
+		<div id="log" class="log">
+			<strong>Events:</strong><br />
+		</div>
+
+		<a href="http://albertgonzalez.coffee">< Back</a>
+
+		<script src="jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script src="../date-ranges-selector.js"></script>
+
+		<script>
+
+			$(document).ready(function() {
+
+				$("#date_ranges_container").datesRangesSelector();
+
+				$("#date_ranges_container").on("datesRangesSelector.rangeAdded", function(event, position, date_begin, date_end) {
+					$("#log").append("Added in pos " + position + " with date_begin: " + date_begin + " and date_end " + date_end + "<br />");
+				});
+
+				$("#date_ranges_container").on("datesRangesSelector.rangeRemoved", function(event, position) {
+					$("#log").append("Removed in pos " + position + "<br />");
+				});
+
+				$("#date_ranges_container").on("datesRangesSelector.allRangesRemoved", function(event) {
+					$("#log").append("All removed <br />");
+				});
+
+				$("#date_ranges_container").on("datesRangesSelector.becameEmpty", function(event) {
+					$("#log").append("Empty! <br />");
+				});
+
+				$("#date_ranges_container").on("datesRangesSelector.becameFull", function(event) {
+					$("#log").append("Not empty anymore! <br />");
+				});
+
+			});
+
+			function add_range_with_dates() {
+				$("#date_ranges_container").datesRangesSelector("addDateRange", { date_begin: "1527554515", date_end: "1528559515", selector: 0 });
+			}
+
+			function get_date_ranges() {
+
+				var ranges = $("#date_ranges_container").datesRangesSelector("getDateRanges");
+
+				var text_ranges = "";
+				if (ranges.length == 0) {
+					text_ranges = "&nbsp;&nbsp;&nbsp;&nbsp;No ranges<br />";
+				} else {
+					$.each(ranges, function(index, value) {
+						text_ranges += "&nbsp;&nbsp;&nbsp;&nbsp;Position " + (index+1) + ". date_begin: " + value.date_begin + ". date_end: " + value.date_end + ". appear: " + value.appear + "<br />";
+					});
+				}
+
+				$("#log").append("Getting current date ranges:<br />" + text_ranges);
+
+			}
+
+		</script>
+
+	</body>
+
+</html>
