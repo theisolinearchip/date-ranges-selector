@@ -3,7 +3,7 @@
 A jQuery plugin to create and manage date ranges.
 Written by [Albert Gonzalez](http://albertgonzalez.coffee) and released under [the Unlicense](http://unlicense.org/).
 
-[See it in action!](http://albertgonzalez.coffee/projects/multi-list/)
+[See it in action!](http://albertgonzalez.coffee/projects/date-ranges-selector/)
 
 ### Install
 
