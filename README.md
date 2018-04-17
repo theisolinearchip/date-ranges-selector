@@ -60,8 +60,12 @@ Remove ALL ranges: $(element).datesRangesSelector("removeAllDateRanges");
 Get all non-empty ranges:
 
 ```markdown
-$(element).datesRangesSelector("getDateRanges");
+$(element).datesRangesSelector("getDateRanges", {options});
 ```
+
+Available options:
+
+* only_non_empty : If true (enabled by default) will only return full populated ranges. Otherwise will return the empty ones too.
 
 Visually disable the plugin (the GET method won't return anything, but still can add elements via methods):
 

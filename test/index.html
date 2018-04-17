@@ -71,7 +71,8 @@
 		</div>
 
 		<div class="options_container">
-			<button onclick="get_date_ranges()">Get ranges</button>
+			<button onclick="get_date_ranges(false)">Get ranges (only non-empty)</button>
+			<button onclick="get_date_ranges(true)">Get ranges (All)</button>
 		</diV>
 
 		<div class="options_container">
@@ -121,9 +122,9 @@
 				$("#date_ranges_container").datesRangesSelector("addDateRange", { date_begin: "1527554515", date_end: "1528559515", selector: 0 });
 			}
 
-			function get_date_ranges() {
+			function get_date_ranges(all) {
 
-				var ranges = $("#date_ranges_container").datesRangesSelector("getDateRanges");
+				var ranges = $("#date_ranges_container").datesRangesSelector("getDateRanges", { only_non_empty: (all ? false : true) });
 
 				var text_ranges = "";
 				if (ranges.length == 0) {

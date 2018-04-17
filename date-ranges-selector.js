@@ -26,7 +26,9 @@
 * Remove an existing range: $(element).datesRangesSelector("removeDateRange", [position (begins with 1)]);
 * Remove ALL ranges: $(element).datesRangesSelector("removeAllDateRanges");
 *
-* Get all populated ranges: $(element).datesRangesSelector("getDateRanges");
+* Get all ranges: $(element).datesRangesSelector("getDateRanges");
+*	Options:
+*		only_non_empty: true by default. If not, will return empty ranges too
 *
 * Visually disable the plugin (the GET method won't return anything disabled, but still can add elements via methods): $(element).datesRangesSelector("disable");
 * Visually enable the plugin: $(element).datesRangesSelector("enable");
@@ -259,6 +261,10 @@
 
 		} else if (action == "getDateRanges") {
 
+			var settings = $.extend({
+				only_non_empty : true,
+			}, options);
+
 			response = [];
 
 			// only get if not disabled
@@ -271,21 +277,21 @@
 					var date_begin = parseInt( $.datepicker.formatDate("@", $.datepicker.parseDate(drs_settings.date_format, $(value).find(".date_begin").last().val())) );
 					var date_end = parseInt( $.datepicker.formatDate("@", $.datepicker.parseDate(drs_settings.date_format, $(value).find(".date_end").last().val())) );
 
-					if (!isNaN(date_begin) && !isNaN(date_end)) {
-						var date_begin_offset = 0;
-						var date_end_offset = 0;
-						if (drs_settings.use_timezone_offset) {
-							date_begin_offset = (new Date(date_begin).getTimezoneOffset()) * 60;
-							date_end_offset = (new Date(date_end).getTimezoneOffset()) * 60;
-						}
+					var date_begin_offset = 0;
+					var date_end_offset = 0;
+					if (drs_settings.use_timezone_offset) {
+						date_begin_offset = !isNaN(date_begin) ? ((new Date(date_begin).getTimezoneOffset()) * 60) : 0;
+						date_end_offset = !isNaN(date_end) ? ((new Date(date_end).getTimezoneOffset()) * 60) : 0;
+					}
 
-						element.date_begin = (date_begin / 1000 - date_begin_offset);
-						element.date_end = (date_end / 1000 - date_end_offset);
+					element.date_begin = (!isNaN(date_begin) ? (date_begin / 1000 - date_begin_offset) : undefined);
+					element.date_end = (!isNaN(date_end) ? (date_end / 1000 - date_end_offset) : undefined);
 
-						if (drs_settings.selector) {
-							element[drs_settings.selector_name] = $(value).find("select").last().val();
-						}
+					if (drs_settings.selector) {
+						element[drs_settings.selector_name] = $(value).find("select").last().val();
+					}
 
+					if (!settings.only_non_empty || (!isNaN(date_begin) && !isNaN(date_end)) ) {
 						response.push(element);
 					}
 
