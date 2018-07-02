@@ -94,7 +94,7 @@
 
 			$(document).ready(function() {
 
-				$("#date_ranges_container").datesRangesSelector();
+				$("#date_ranges_container").datesRangesSelector({max_date: "+2Y"});
 
 				$("#date_ranges_container").on("datesRangesSelector.rangeAdded", function(event, position, date_begin, date_end) {
 					$("#log").append("Added in pos " + position + " with date_begin: " + date_begin + " and date_end " + date_end + "<br />");

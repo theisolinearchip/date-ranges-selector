@@ -68,11 +68,12 @@
 			var settings = $.extend({
 				new_date_range_text : "+ Add a new date range",
 				main_class_prefix : "drs",
+				max_date: "+1Y",
 				date_format : "D, dd/mm/yy",
 				selector : true,
 				selector_name : "appear",
 				selector_options : [ ["Display", "1"], ["Don't display", "0"] ],
-				use_timezone_offset : true
+				use_timezone_offset : true,
 			}, options);
 
 			$("#" + main_id).html("<button class='drs_add_new_date_range_button' type='button' onclick='jQuery(\"#" + main_id + "\").datesRangesSelector(\"addDateRange\")' >" + settings.new_date_range_text + "</button>");
@@ -151,7 +152,7 @@
 
 			datepicker_begin.datepicker({
 				//minDate: 0,
-				maxDate: "+1Y",
+				maxDate: drs_settings.max_date,
 				changeMonth: true,
 				numberOfMonths: 2,
 				dateFormat: drs_settings.date_format,
@@ -163,7 +164,7 @@
 
 			datepicker_end.datepicker({
 				//minDate: 0,
-				maxDate: "+1Y",
+				maxDate: drs_settings.max_date,
 				changeMonth: true,
 				numberOfMonths: 2,
 				dateFormat: drs_settings.date_format,
