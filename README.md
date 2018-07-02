@@ -23,6 +23,7 @@ Available options:
 
 * new_date_range_text : Default text for the starting button
 * main_class_prefix : Css class for the plugin main container
+* max_date : Max date value. Default: "+1Y"
 * date_format : Something like "D, dd/mm/yy". Used by the datepickers
 * selector : If true (enabled by default), adds an aditional selector that will be attached to every range)
 * selector_name : "appear" by default. The "name" of the selector (if provided
