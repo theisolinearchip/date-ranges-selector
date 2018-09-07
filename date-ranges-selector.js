@@ -281,8 +281,8 @@
 					var date_begin_offset = 0;
 					var date_end_offset = 0;
 					if (drs_settings.use_timezone_offset) {
-						date_begin_offset = !isNaN(date_begin) ? ((new Date(date_begin).getTimezoneOffset()) * 60) : 0;
-						date_end_offset = !isNaN(date_end) ? ((new Date(date_end).getTimezoneOffset()) * 60) : 0;
+						date_begin_offset = !isNaN(date_begin) ? ((new Date().getTimezoneOffset()) * 60) : 0;
+						date_end_offset = !isNaN(date_end) ? ((new Date().getTimezoneOffset()) * 60) : 0;
 					}
 
 					element.date_begin = (!isNaN(date_begin) ? (date_begin / 1000 - date_begin_offset) : undefined);
