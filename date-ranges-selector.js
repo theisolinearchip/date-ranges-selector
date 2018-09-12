@@ -8,6 +8,7 @@
 * Methods:
 * Init: $(element).datesRangesSelector({options});
 *	Options:
+*		max_date : "+1Y",
 *		new_date_range_text : "+ Add a new date range",
 *		main_class_prefix : "drs",
 *		date_format : "D, dd/mm/yy",
@@ -175,11 +176,19 @@
 
 			// Set the values (if provided)
 			if (settings.date_begin != undefined) {
-				datepicker_begin.datepicker("setDate", $.datepicker.parseDate('@', parseInt(settings.date_begin) * 1000));
+				var date_begin_offset = 0;
+				if (drs_settings.use_timezone_offset) {
+					date_begin_offset = !isNaN(settings.date_begin) ? ((new Date().getTimezoneOffset()) * 60) : 0;
+				}
+				datepicker_begin.datepicker("setDate", $.datepicker.parseDate('@', (parseInt(settings.date_begin) + date_begin_offset) * 1000));
 			}
 
 			if (settings.date_end != undefined) {
-				datepicker_end.datepicker("setDate", $.datepicker.parseDate('@', parseInt(settings.date_end) * 1000));
+				var date_end_offset = 0;
+				if (drs_settings.use_timezone_offset) {
+					date_end_offset = !isNaN(settings.date_end) ? ((new Date().getTimezoneOffset()) * 60) : 0;
+				}
+				datepicker_end.datepicker("setDate", $.datepicker.parseDate('@', (parseInt(settings.date_end) + date_end_offset) * 1000));
 			}
 
 			if (drs_settings.selector && settings.selector != undefined) {
