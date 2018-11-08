@@ -15,14 +15,16 @@
 *		selector : true, (an aditional selector that will be attached to every range)
 *		selector_name : "appear",
 *		selector_options : [ ["Display", "1"], ["Don't display", "0"] ],
-*		use_timezone_offset : true
+*		use_timezone_offset : true,
+*		placeholder_date_begin,
+*		placeholder_date_end
 * Remove: $(element).datesRangesSelector("remove");
 *
 * Add a new range: $(element).datesRangesSelector("addDateRange", {options});
 * 	Options:
 *		date_begin,
 *		date_end, (in unixtime, SECONDS. If set, will init the datepickers with those dates)
-*		selector (the same, but with the value from the selector)
+*		selector (the same, but with the value from the selector),
 *
 * Remove an existing range: $(element).datesRangesSelector("removeDateRange", [position (begins with 1)]);
 * Remove ALL ranges: $(element).datesRangesSelector("removeAllDateRanges");
@@ -75,8 +77,10 @@
 				selector_name : "appear",
 				selector_options : [ ["Display", "1"], ["Don't display", "0"] ],
 				use_timezone_offset : true,
+				placeholder_date_begin : "Begin",
+				placeholder_date_end : "End",
 			}, options);
-
+			
 			$("#" + main_id).html("<button class='drs_add_new_date_range_button' type='button' onclick='jQuery(\"#" + main_id + "\").datesRangesSelector(\"addDateRange\")' >" + settings.new_date_range_text + "</button>");
 
 			// add class
@@ -101,7 +105,7 @@
 			var settings = $.extend({
 				date_begin : undefined,
 				date_end : undefined,
-				selector : undefined,
+				selector : undefined
 			}, options);
 
 			// hide start button just in case
@@ -116,10 +120,10 @@
 			// compose the new element
 			var new_element = '<div class="line" data-position="' + (current_elements + 1) + '"> \
 				<div class="element"> \
-					<input type="text" class="date_begin" placeholder="Begin" value="" /> \
+					<input type="text" class="date_begin" placeholder="' + drs_settings.placeholder_date_begin + '" value="" /> \
 				</div> \
 				<div class="element"> \
-					<input type="text" class="date_end" placeholder="End" value="" /> \
+					<input type="text" class="date_end" placeholder="' + drs_settings.placeholder_date_end + '" value="" /> \
 				</div>';
 
 			if (drs_settings.selector && drs_settings.selector_options.length > 0) {
