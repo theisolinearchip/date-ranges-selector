@@ -17,7 +17,8 @@
 *		selector_options : [ ["Display", "1"], ["Don't display", "0"] ],
 *		use_timezone_offset : true,
 *		placeholder_date_begin,
-*		placeholder_date_end
+*		placeholder_date_end,
+*		fixed_ranges : undefined,
 * Remove: $(element).datesRangesSelector("remove");
 *
 * Add a new range: $(element).datesRangesSelector("addDateRange", {options});
@@ -79,6 +80,8 @@
 				use_timezone_offset : true,
 				placeholder_date_begin : "Begin",
 				placeholder_date_end : "End",
+				initial_ranges : 0,
+				disable_add_remove: false,
 			}, options);
 			
 			$("#" + main_id).html("<button class='drs_add_new_date_range_button' type='button' onclick='jQuery(\"#" + main_id + "\").datesRangesSelector(\"addDateRange\")' >" + settings.new_date_range_text + "</button>");
@@ -91,6 +94,10 @@
 
 			// Save enabled / disabled status
 			$.fn.datesRangesSelector.drs_enabled[main_id] = true;
+
+			for (var i = 0; i < settings.initial_ranges; i++) {
+				$("#" + main_id).datesRangesSelector("addDateRange");
+			}
 
 			response = this;
 
@@ -141,12 +148,14 @@
 					</select> \
 				</div>';
 			}
-				
-			new_element += '<div class="element"> \
-					<button class="drs_remove_date_range_button" type="button" onclick="jQuery(\'#' + main_id + '\').datesRangesSelector(\'removeDateRange\', ' + (current_elements + 1) + ')" >-</button> \
-					<button class="drs_add_date_range_button" type="button" onclick="jQuery(\'#' + main_id + '\').datesRangesSelector(\'addDateRange\')" >+</button> \
-				</div> \
-			</div>';
+			
+			if (!drs_settings.disable_add_remove) {
+				new_element += '<div class="element"> \
+						<button class="drs_remove_date_range_button" type="button" onclick="jQuery(\'#' + main_id + '\').datesRangesSelector(\'removeDateRange\', ' + (current_elements + 1) + ')" >-</button> \
+						<button class="drs_add_date_range_button" type="button" onclick="jQuery(\'#' + main_id + '\').datesRangesSelector(\'addDateRange\')" >+</button> \
+					</div> \
+				</div>';
+			}
 
 			// append
 			$("#" + main_id).append(new_element);

@@ -29,6 +29,8 @@ Available options:
 * selector_name : "appear" by default. The "name" of the selector (if provided
 * selector_options : Array of options to be shown in the selector. Each element is another array "text"-"value". Default: [ ["Display", "1"], ["Don't display", "0"] ]
 * use_timezone_offset : If true (enabled by default) uses timezone offsets when fetching dates
+* initial_ranges : Start with a fixed amount of ranges (0 by default)
+* disable_add_remove : If true (false by default) disables the "add/remove range" buttons
 
 Now you're ready!
 
